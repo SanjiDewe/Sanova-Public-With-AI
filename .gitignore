@@ -15,6 +15,7 @@ htmlcov/
 # Local Sanova state
 .sanova/
 data/*.sqlite3
+*.egg-info/
 
 # Build / release artifacts
 dist/
