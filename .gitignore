@@ -1,0 +1,28 @@
+# Environment / secrets
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Local Sanova state
+.sanova/
+data/*.sqlite3
+
+# Build / release artifacts
+dist/
+*.zip
+*.tar.gz
+
+# Local tooling
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

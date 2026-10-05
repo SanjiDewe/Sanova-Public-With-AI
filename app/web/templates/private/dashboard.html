@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block title %}{{ t('nav.dashboard') }} · Sanova{% endblock %}
+{% block content %}
+<section class="app-pagebar">
+  <div class="app-pagebar-title"><p class="eyebrow">{{ t('app.overview') }}</p><h1>Workspace overview</h1><p>{{ t('app.dashboard.body') }}</p></div>
+  <div class="page-actions"><a class="button" href="/app/ai"><svg><use href="#i-spark"></use></svg>{{ t('nav.ai') }}</a><a class="button primary" href="/app/execute"><svg><use href="#i-plus"></use></svg>{{ t('nav.execute') }}</a></div>
+</section>
+
+<section class="kpi-grid" aria-label="{{ t('app.overview') }}">
+  <article class="kpi-card"><span class="stat-label">{{ t('app.readiness.sandbox') }}</span><div class="kpi-value"><strong>{{ t('public.status.sandbox') }}</strong><span>available</span></div><div class="kpi-meta">{% if runtime.sandbox_safe %}Sandbox operations are currently safe to run.{% else %}Sandbox readiness needs attention.{% endif %}</div></article>
+  <article class="kpi-card"><span class="stat-label">{{ t('app.readiness.production') }}</span><div class="kpi-value"><strong>{{ t('public.status.locked') }}</strong><span>protected</span></div><div class="kpi-meta">Production execution remains outside this release boundary.</div></article>
+  <article class="kpi-card"><span class="stat-label">{{ t('app.admin.audit') }}</span><div class="kpi-value"><strong>{{ audit_count }}</strong><span>events</span></div><div class="kpi-meta">Recorded activity in this Sanova workspace.</div></article>
+</section>
+
+<div class="workspace-grid">
+  <section class="panel">
+    <div class="panel-head"><div><h2>Start with a workflow</h2><p>Move from idea to controlled action without leaving the workspace.</p></div><a class="quiet-link" href="/app/tasks">{{ t('nav.tasks') }} →</a></div>
+    <div class="panel-body"><div class="flow-list">
+      <a class="flow-item" href="/app/ai"><span class="flow-num">01</span><span><strong>Describe the outcome</strong><span>Tell Sanova what you want in plain language.</span></span><svg><use href="#i-chevron"></use></svg></a>
+      <a class="flow-item" href="/app/execute"><span class="flow-num">02</span><span><strong>Create a sandbox task</strong><span>Turn a clear intent into an auditable task.</span></span><svg><use href="#i-chevron"></use></svg></a>
+      <a class="flow-item" href="/app/tasks"><span class="flow-num">03</span><span><strong>Watch the lifecycle</strong><span>Review processing, fulfillment, shipping and completion.</span></span><svg><use href="#i-chevron"></use></svg></a>
+    </div></div>
+  </section>
+  <aside class="panel">
+    <div class="panel-head"><div><h2>{{ t('app.dashboard.safety_title') }}</h2><p>Release boundary</p></div><span class="status"><span class="dot"></span>{{ t('public.status.sandbox') }}</span></div>
+    <div class="panel-body"><div class="activity-list">
+      <div class="activity-row"><span class="activity-icon">✓</span><span class="activity-copy"><strong>Sandbox execution</strong><span>{% if runtime.sandbox_safe %}Ready for controlled runs.{% else %}Review readiness issues.{% endif %}</span></span><span class="activity-time">now</span></div>
+      <div class="activity-row"><span class="activity-icon">◎</span><span class="activity-copy"><strong>Production boundary</strong><span>Live physical execution is locked.</span></span><span class="activity-time">policy</span></div>
+      <div class="activity-row"><span class="activity-icon">↗</span><span class="activity-copy"><strong>Audit trail</strong><span>Workspace actions remain traceable.</span></span><span class="activity-time">{{ audit_count }}</span></div>
+    </div><a class="button full-width" href="/app/readiness" style="margin-top:12px">{{ t('app.readiness.title') }}</a></div>
+  </aside>
+</div>
+
+<section class="section"><div class="panel-head" style="padding-left:0;padding-right:0"><div><h2>Quick access</h2><p>Open the part of Sanova you need.</p></div></div><div class="quick-card-grid">
+  <a class="quick-card" href="/app/ai"><span class="quick-card-icon"><svg><use href="#i-spark"></use></svg></span><span class="quick-card-copy"><strong>{{ t('nav.ai') }}</strong><span>{{ t('app.ai.body') }}</span></span><svg><use href="#i-chevron"></use></svg></a>
+  <a class="quick-card" href="/app/tasks"><span class="quick-card-icon"><svg><use href="#i-check"></use></svg></span><span class="quick-card-copy"><strong>{{ t('nav.tasks') }}</strong><span>{{ t('app.tasks.body') }}</span></span><svg><use href="#i-chevron"></use></svg></a>
+  <a class="quick-card" href="/app/integrations"><span class="quick-card-icon"><svg><use href="#i-grid"></use></svg></span><span class="quick-card-copy"><strong>{{ t('nav.integrations') }}</strong><span>{{ t('app.integrations.body') }}</span></span><svg><use href="#i-chevron"></use></svg></a>
+</div></section>
+{% endblock %}

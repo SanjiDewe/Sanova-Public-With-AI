@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block title %}{{ t('app.readiness.title') }} · Sanova{% endblock %}
+{% block content %}
+<section class="app-pagebar"><div class="app-pagebar-title"><p class="eyebrow">{{ t('app.readiness.title') }}</p><h1>{{ t('app.readiness.title') }}</h1><p>Check the current release boundary before running a workflow.</p></div></section>
+<div class="readiness-grid">
+  <article class="readiness-card"><div class="readiness-card-head"><h2>{{ t('app.readiness.sandbox') }}</h2><span class="status"><span class="dot"></span>{{ t('public.status.sandbox') }}</span></div><div class="readiness-score">{{ runtime.sandbox_safe }}</div><div class="readiness-meter"><span></span></div></article>
+  <article class="readiness-card"><div class="readiness-card-head"><h2>{{ t('app.readiness.production') }}</h2><span class="status">Protected</span></div><div class="readiness-score">{{ runtime.production_locked }}</div><div class="readiness-meter"><span></span></div></article>
+</div>
+{% if runtime.issues or deployment.issues %}<section class="section"><div class="panel"><div class="panel-head"><div><h2>{{ t('app.readiness.issues') }}</h2><p>Items reported by the existing readiness checks.</p></div></div><div class="panel-body"><div class="readiness-issues">{% for issue in runtime.issues %}<div class="readiness-issue"><strong>{{ issue.code }}</strong><span>{{ issue.message }}</span></div>{% endfor %}{% for issue in deployment.issues %}<div class="readiness-issue"><strong>{{ issue.code }}</strong><span>{{ issue.message }}</span></div>{% endfor %}</div></div></div></section>{% endif %}
+{% endblock %}

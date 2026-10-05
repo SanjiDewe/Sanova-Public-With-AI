@@ -1,0 +1,6 @@
+{% extends 'base.html' %}
+{% block title %}{{ t('app.admin.user.details') }} · Sanova{% endblock %}
+{% block content %}
+<section class="app-pagebar"><div class="app-pagebar-title"><p class="eyebrow">{{ t('nav.admin') }}</p><h1>{{ t('app.admin.user.details') }}</h1><p>{{ item.email }}</p></div><div class="page-actions"><a class="button" href="/super-admin">{{ t('common.back') }}</a></div></section>
+<div class="card"><div class="detail-list"><div><span>{{ t('app.admin.user.email') }}</span><strong>{{ item.email }}</strong></div><div><span>{{ t('app.admin.user.role') }}</span><strong>{{ item.role }}</strong></div><div><span>{{ t('app.admin.user.status') }}</span><strong>{% if item.active %}{{ t('app.admin.user.active') }}{% else %}{{ t('app.admin.user.inactive') }}{% endif %}</strong></div><div><span>ID</span><strong>{{ item.id }}</strong></div></div></div>
+{% endblock %}

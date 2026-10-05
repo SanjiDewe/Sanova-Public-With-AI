@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}{{ t('auth.verify.title') }} · Sanova{% endblock %}
+{% block content %}
+<section class="auth-layout single-auth">
+  <div class="auth-intro"><span class="eyebrow">{{ t('auth.verify.title') }}</span><h1>{{ t('auth.verify.title') }}</h1><p class="muted">{{ t('auth.verify.message') }}</p></div>
+  <div class="card auth-card">
+    {% if error %}<div class="alert">{{ error }}</div>{% endif %}
+    <form method="post" action="/verify-email">
+      <div class="field"><label for="verify-email">{{ t('auth.email') }}</label><input id="verify-email" type="email" name="email" required value="{{ request.query_params.get('email','') }}" autocomplete="email"></div>
+      <div class="field"><label for="verify-code">{{ t('auth.verify.code') }}</label><input id="verify-code" class="code-input" type="text" name="code" required inputmode="numeric" pattern="[0-9]{6}" maxlength="6" autocomplete="one-time-code"></div>
+      <button class="primary full-width" type="submit">{{ t('auth.verify.submit') }}</button>
+    </form>
+  </div>
+</section>
+{% endblock %}

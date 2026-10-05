@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="{{ locale }}" data-theme="{{ theme }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="{{ url_for('static', path='favicon.svg') }}" type="image/svg+xml">
+  <title>{% block title %}Sanova{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', path='app.css') }}">
+</head>
+<body class="{% if user %}app-body{% else %}public-body{% endif %}">
+<svg class="icon-sprite" aria-hidden="true" focusable="false">
+  <symbol id="i-home" viewBox="0 0 24 24"><path d="m4 10 8-6 8 6v9a1 1 0 0 1-1 1h-5v-6H10v6H5a1 1 0 0 1-1-1z"/></symbol>
+  <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 2 14 9l7 3-7 3-2 7-2-7-7-3 7-3z"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="m8 5 11 7-11 7z"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+  <symbol id="i-grid" viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6" rx="1"/><rect x="14" y="4" width="6" height="6" rx="1"/><rect x="4" y="14" width="6" height="6" rx="1"/><rect x="14" y="14" width="6" height="6" rx="1"/></symbol>
+  <symbol id="i-settings" viewBox="0 0 24 24"><path d="M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8Z"/><path d="m19.4 15 .2.1a1.8 1.8 0 0 1-1.8 3.1l-.2-.1-1.4-.8a7.9 7.9 0 0 1-1.8 1l-.2 1.6a1.8 1.8 0 0 1-3.6 0l-.2-1.6a7.9 7.9 0 0 1-1.8-1l-1.4.8-.2.1A1.8 1.8 0 0 1 4.9 15l.1-.2.8-1.4a7.9 7.9 0 0 1-1-1.8l-1.6-.2a1.8 1.8 0 0 1 0-3.6l1.6-.2a7.9 7.9 0 0 1 1-1.8L5 4.4l-.1-.2a1.8 1.8 0 0 1 3.1-1.8l.1.2.8 1.4a7.9 7.9 0 0 1 1.8-1l.2-1.6a1.8 1.8 0 0 1 3.6 0l.2 1.6a7.9 7.9 0 0 1 1.8 1l1.4-.8.2-.1a1.8 1.8 0 0 1 1.8 3.1l-.2.1-1.4.8a7.9 7.9 0 0 1 1 1.8l1.6.2a1.8 1.8 0 0 1 0 3.6l-1.6.2a7.9 7.9 0 0 1-1 1.8z"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 4.5 4.5"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-bolt" viewBox="0 0 24 24"><path d="m13 2-8 11h6l-1 9 8-11h-6z"/></symbol>
+  <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></symbol>
+  <symbol id="i-chevron-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+  <symbol id="i-panel" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 4v16"/></symbol>
+  <symbol id="i-sliders" viewBox="0 0 24 24"><path d="M4 7h7M15 7h5M4 17h3M11 17h9"/><circle cx="13" cy="7" r="2"/><circle cx="9" cy="17" r="2"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 15.2A8.3 8.3 0 0 1 8.8 4 8.4 8.4 0 1 0 20 15.2Z"/></symbol>
+  <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.2 2.5 3.4 5.5 3.4 9S14.2 19.5 12 21c-2.2-1.5-3.4-4.5-3.4-9S9.8 5.5 12 3Z"/></symbol>
+</svg>
+
+<div class="shell {% if user %}app-shell{% else %}public-shell{% endif %}">
+{% if user %}
+<header class="app-topbar">
+  <div class="app-topbar-left">
+    <button class="icon-button sidebar-toggle mobile-only" type="button" data-sidebar-toggle aria-label="Open navigation" title="Open navigation"><svg><use href="#i-menu"></use></svg></button>
+    <a class="app-brand" href="/app" aria-label="Sanova workspace"><span class="app-brand-mark"><img src="{{ url_for('static', path='sanova-ui-mark.svg') }}" alt="" width="28" height="28"></span><span class="app-brand-word">Sanova</span></a>
+    <span class="topbar-divider" aria-hidden="true"></span>
+    <span class="topbar-context">{% if request.url.path == '/app' %}{{ t('nav.dashboard') }}{% elif request.url.path.startswith('/app/ai') %}{{ t('nav.ai') }}{% elif request.url.path.startswith('/app/execute') %}{{ t('nav.execute') }}{% elif request.url.path.startswith('/app/tasks') %}{{ t('nav.tasks') }}{% elif request.url.path.startswith('/app/integrations') %}{{ t('nav.integrations') }}{% elif request.url.path.startswith('/app/settings') %}{{ t('nav.settings') }}{% elif request.url.path.startswith('/super-admin') %}{{ t('nav.admin') }}{% elif request.url.path.startswith('/app/readiness') %}{{ t('app.readiness.title') }}{% else %}{{ t('nav.app') }}{% endif %}</span>
+  </div>
+  <div class="app-topbar-actions">
+    <button class="topbar-command" type="button" data-command-open aria-label="Search Sanova" title="Search Sanova"><svg><use href="#i-search"></use></svg><span>Search</span><kbd>Ctrl K</kbd></button>
+    <div class="locale-switcher" data-locale-switcher><button class="icon-button" type="button" data-locale-toggle aria-expanded="false" aria-haspopup="true" aria-label="{{ t('nav.language') }}" title="{{ t('nav.language') }}"><svg><use href="#i-globe"></use></svg></button><div class="locale-menu" data-locale-menu hidden><button type="button" data-locale="en"{% if locale == 'en' %} aria-current="true"{% endif %}>{{ t('language.english') }}</button><button type="button" data-locale="id"{% if locale == 'id' %} aria-current="true"{% endif %}>{{ t('language.indonesian') }}</button></div></div>
+    <button class="icon-button" type="button" data-theme-toggle aria-label="{{ t('nav.theme') }}" title="{{ t('nav.theme') }}"><svg data-theme-icon><use href="#i-moon"></use></svg></button>
+    <div class="user-menu" data-user-menu><button class="user-avatar" type="button" data-user-menu-toggle aria-expanded="false" aria-haspopup="true" title="{{ user.email }}">{{ user.email[:1]|upper }}</button><div class="user-popover" data-user-menu-popover hidden><div class="user-popover-head"><span class="user-avatar large">{{ user.email[:1]|upper }}</span><div><strong>{{ user.email }}</strong><span>{{ user.role }}</span></div></div><a href="/app/settings">{{ t('nav.settings') }}</a><form method="post" action="/logout"><button type="submit">{{ t('nav.logout') }}</button></form></div></div>
+  </div>
+</header>
+<div class="app-layout">
+  <div class="app-sidebar-backdrop" data-sidebar-backdrop hidden></div>
+  <aside class="app-sidebar" data-app-sidebar aria-label="{{ t('nav.app') }}">
+    <div class="workspace-switcher"><div class="workspace-icon"><img src="{{ url_for('static', path='sanova-ui-mark.svg') }}" alt="" width="23" height="23"></div><div class="workspace-copy"><strong>Sanova</strong><span>Personal workspace</span></div><svg><use href="#i-chevron-down"></use></svg></div>
+    <div class="sidebar-actions"><button class="sidebar-action" type="button" data-command-open><svg><use href="#i-search"></use></svg><span>Search</span><kbd>⌘K</kbd></button><a class="sidebar-action primary" href="/app/execute"><svg><use href="#i-plus"></use></svg><span>{{ t('nav.execute') }}</span></a></div>
+    <div class="sidebar-group"><span class="sidebar-label">Workspace</span><a href="/app" class="sidebar-link{% if request.url.path == '/app' %} active{% endif %}"{% if request.url.path == '/app' %} aria-current="page"{% endif %}><svg><use href="#i-home"></use></svg><span>{{ t('nav.dashboard') }}</span></a><a href="/app/ai" class="sidebar-link{% if request.url.path.startswith('/app/ai') %} active{% endif %}"{% if request.url.path.startswith('/app/ai') %} aria-current="page"{% endif %}><svg><use href="#i-spark"></use></svg><span>{{ t('nav.ai') }}</span></a><a href="/app/tasks" class="sidebar-link{% if request.url.path.startswith('/app/tasks') %} active{% endif %}"{% if request.url.path.startswith('/app/tasks') %} aria-current="page"{% endif %}><svg><use href="#i-check"></use></svg><span>{{ t('nav.tasks') }}</span></a><a href="/app/integrations" class="sidebar-link{% if request.url.path.startswith('/app/integrations') %} active{% endif %}"{% if request.url.path.startswith('/app/integrations') %} aria-current="page"{% endif %}><svg><use href="#i-grid"></use></svg><span>{{ t('nav.integrations') }}</span></a></div>
+    <div class="sidebar-group"><span class="sidebar-label">System</span><a href="/app/readiness" class="sidebar-link{% if request.url.path.startswith('/app/readiness') %} active{% endif %}"{% if request.url.path.startswith('/app/readiness') %} aria-current="page"{% endif %}><svg><use href="#i-bolt"></use></svg><span>{{ t('app.readiness.title') }}</span></a><a href="/app/settings" class="sidebar-link{% if request.url.path.startswith('/app/settings') %} active{% endif %}"{% if request.url.path.startswith('/app/settings') %} aria-current="page"{% endif %}><svg><use href="#i-settings"></use></svg><span>{{ t('nav.settings') }}</span></a></div>
+    <div class="sidebar-spacer"></div><div class="sidebar-footer"><div class="sandbox-indicator"><span class="status-dot"></span><span>{{ t('public.status.sandbox') }}</span><small>{{ t('public.status.locked') }}</small></div><button class="sidebar-link compact" type="button" data-sidebar-collapse><svg><use href="#i-panel"></use></svg><span>Collapse sidebar</span></button></div>
+  </aside>
+{% else %}
+<header class="site-header"><div class="container nav"><a class="brand" href="/" aria-label="Sanova home"><span class="brand-mark"><img src="{{ url_for('static', path='sanova-ui-mark.svg') }}" alt="" width="34" height="34"></span><span class="brand-copy">Sanova</span></a><button class="mobile-menu-toggle" type="button" data-menu-toggle aria-expanded="false" aria-controls="primary-navigation"><span class="sr-only">{{ t('nav.menu') }}</span><span aria-hidden="true">☰</span></button><nav id="primary-navigation" class="navlinks" data-mobile-menu aria-label="Primary"><a href="/">{{ t('nav.home') }}</a><a href="/login">{{ t('nav.login') }}</a><a class="button primary nav-cta" href="/signup">{{ t('nav.signup') }}</a><div class="locale-switcher" data-locale-switcher><button class="icon-button locale-icon" type="button" data-locale-toggle aria-expanded="false" aria-haspopup="true" aria-label="{{ t('nav.language') }}" title="{{ t('nav.language') }}"><svg><use href="#i-globe"></use></svg></button><div class="locale-menu" data-locale-menu hidden><button type="button" data-locale="en"{% if locale == 'en' %} aria-current="true"{% endif %}>{{ t('language.english') }}</button><button type="button" data-locale="id"{% if locale == 'id' %} aria-current="true"{% endif %}>{{ t('language.indonesian') }}</button></div></div><button class="icon-button theme-icon" type="button" data-theme-toggle aria-label="{{ t('nav.theme') }}" title="{{ t('nav.theme') }}"><svg data-theme-icon><use href="#i-moon"></use></svg></button></nav></div></header>
+{% endif %}
+
+<main class="{% if user %}app-main-shell{% else %}container main{% endif %}">{% block content %}{% endblock %}</main>
+
+{% if user %}
+</div>
+<footer class="app-footer"><span>Sanova</span><span class="inline"><a href="/privacy">{{ t('public.footer.privacy') }}</a><a href="/terms">{{ t('public.footer.terms') }}</a></span></footer>
+<div class="command-palette" data-command-palette hidden><div class="command-backdrop" data-command-close></div><section class="command-dialog" role="dialog" aria-modal="true" aria-label="Search Sanova"><div class="command-input"><svg><use href="#i-search"></use></svg><input type="search" data-command-search placeholder="Search Sanova" autocomplete="off"><kbd>Esc</kbd></div><div class="command-results" data-command-results><a href="/app" data-command-item><span class="command-icon"><svg><use href="#i-home"></use></svg></span><span><strong>{{ t('nav.dashboard') }}</strong><small>Workspace overview</small></span><svg class="command-arrow"><use href="#i-chevron"></use></svg></a><a href="/app/ai" data-command-item><span class="command-icon"><svg><use href="#i-spark"></use></svg></span><span><strong>{{ t('nav.ai') }}</strong><small>Talk to Sanova</small></span><svg class="command-arrow"><use href="#i-chevron"></use></svg></a><a href="/app/tasks" data-command-item><span class="command-icon"><svg><use href="#i-check"></use></svg></span><span><strong>{{ t('nav.tasks') }}</strong><small>Review task lifecycle</small></span><svg class="command-arrow"><use href="#i-chevron"></use></svg></a><a href="/app/execute" data-command-item><span class="command-icon"><svg><use href="#i-plus"></use></svg></span><span><strong>{{ t('nav.execute') }}</strong><small>Create a sandbox task</small></span><svg class="command-arrow"><use href="#i-chevron"></use></svg></a><a href="/app/integrations" data-command-item><span class="command-icon"><svg><use href="#i-grid"></use></svg></span><span><strong>{{ t('nav.integrations') }}</strong><small>Connected services</small></span><svg class="command-arrow"><use href="#i-chevron"></use></svg></a><a href="/app/settings" data-command-item><span class="command-icon"><svg><use href="#i-settings"></use></svg></span><span><strong>{{ t('nav.settings') }}</strong><small>Account preferences</small></span><svg class="command-arrow"><use href="#i-chevron"></use></svg></a></div><div class="command-footer"><span>Navigate</span><span><kbd>↑</kbd><kbd>↓</kbd> select</span><span><kbd>↵</kbd> open</span></div></section></div>
+{% else %}
+<footer class="container footer"><div class="footer-inner"><span>Sanova</span><span class="inline"><a href="/privacy">{{ t('public.footer.privacy') }}</a><a href="/terms">{{ t('public.footer.terms') }}</a></span></div></footer>
+{% endif %}
+</div>
+<script src="{{ url_for('static', path='app.js') }}"></script>
+</body>
+</html>

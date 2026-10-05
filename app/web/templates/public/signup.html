@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% block title %}{{ t('auth.signup.title') }} · Sanova{% endblock %}
+{% block content %}
+<section class="auth-layout auth-live" data-auth="signup">
+  <script type="application/json" data-auth-i18n>{{ {
+    'greet': {'morning': t('auth.live.greet_morning'), 'afternoon': t('auth.live.greet_afternoon'), 'evening': t('auth.live.greet_evening'), 'night': t('auth.live.greet_night')},
+    'email_bad': t('auth.live.email_bad'), 'caps': t('auth.live.caps'),
+    'show': t('auth.live.show'), 'hide': t('auth.live.hide'), 'busy': t('auth.live.signup_busy'),
+    'strength': ['', t('auth.live.str_weak'), t('auth.live.str_fair'), t('auth.live.str_good'), t('auth.live.str_strong')],
+    'pw_hint': t('auth.live.pw_hint')
+  }|tojson }}</script>
+
+  <div class="auth-intro">
+    <span class="eyebrow auth-rise" style="--i:0" data-auth-greet>{{ t('nav.signup') }}</span>
+    <h1 class="auth-rise auth-title" style="--i:1" data-auth-title>{{ t('auth.live.signup_title') }}</h1>
+    <p class="muted auth-rise" style="--i:2">{{ t('auth.live.signup_body') }}</p>
+
+    <div class="auth-orbit-wrap auth-rise" style="--i:3" aria-hidden="true">
+      <div class="auth-orbit" data-auth-orbit data-state="idle" data-lit>
+        <span class="ring r1"></span><span class="ring r2"></span>
+        <div class="auth-arm" style="--o:0s"><div class="auth-node"><span class="auth-chip"><img src="{{ url_for('static', path='provider-openai.svg') }}" alt="" width="22" height="22"></span></div></div>
+        <div class="auth-arm" style="--o:-8.7s"><div class="auth-node"><span class="auth-chip"><img src="{{ url_for('static', path='provider-anthropic.svg') }}" alt="" width="22" height="22"></span></div></div>
+        <div class="auth-arm" style="--o:-17.3s"><div class="auth-node"><span class="auth-chip"><img src="{{ url_for('static', path='provider-gemini.svg') }}" alt="" width="22" height="22"></span></div></div>
+        <div class="auth-core">
+          <img src="{{ url_for('static', path='sanova-ui-mark.svg') }}" alt="" width="44" height="44">
+          <span class="auth-lock"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/></svg></span>
+        </div>
+      </div>
+    </div>
+
+    <ul class="auth-checks auth-rise" style="--i:4" aria-live="polite">
+      <li data-check="email"><span class="box"></span>{{ t('auth.live.check_email') }}</li>
+      <li data-check="pass"><span class="box"></span>{{ t('auth.live.check_pass') }}</li>
+      <li data-check="ready"><span class="box"></span>{{ t('auth.live.check_ready') }}</li>
+    </ul>
+
+    <p class="auth-note auth-rise" style="--i:5"><i class="auth-pulse"></i>{{ t('auth.live.signup_note') }}</p>
+  </div>
+
+  <div class="card auth-card auth-rise" style="--i:2">
+    {% if request.query_params.get('oauth_error') %}<div class="alert">{{ request.query_params.get('oauth_error') }}</div>{% endif %}
+    {% if error %}<div class="alert">{{ error }}</div>{% endif %}
+    <a class="button google-button full-width" href="/oauth/google/start?mode=signup"><span class="google-g">G</span>{{ t('auth.google') }}</a>
+    <div class="oauth-divider"><span>{{ t('auth.live.or') }}</span></div>
+    <form method="post" action="/signup" novalidate>
+      <div class="field" data-field="email">
+        <label for="signup-email">{{ t('auth.email') }}</label>
+        <div class="field-control">
+          <input id="signup-email" type="email" name="email" required autocomplete="email" placeholder="nama@email.com" spellcheck="false" autocapitalize="off">
+          <svg class="field-tick" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
+        </div>
+        <div class="field-hint" data-hint="email" aria-live="polite"></div>
+      </div>
+      <div class="field" data-field="password">
+        <label for="signup-password">{{ t('auth.password') }}</label>
+        <div class="field-control">
+          <input id="signup-password" type="password" name="password" required autocomplete="new-password">
+          <button class="pw-toggle" type="button" data-pw-toggle aria-pressed="false">{{ t('auth.live.show') }}</button>
+        </div>
+        <div class="strength" data-strength data-level="0" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+        <div class="field-hint" data-hint="password" aria-live="polite">{{ t('auth.live.pw_hint') }}</div>
+      </div>
+      <button class="primary full-width" type="submit" data-submit>{{ t('auth.signup.submit') }}</button>
+    </form>
+    <p class="form-footnote muted">{{ t('auth.have_account') }} <a class="text-link" href="/login">{{ t('auth.login_link') }}</a></p>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,6 @@
+{% extends 'base.html' %}
+{% block title %}Super Admin · Sanova{% endblock %}
+{% block content %}
+<section class="app-pagebar"><div class="app-pagebar-title"><p class="eyebrow">Super Admin</p><h1>Privileged access</h1><p>Enter the Super Admin access code to continue.</p></div></section>
+<div class="card" style="max-width:560px;margin:0 auto"><form method="post" action="/super-admin/access">{% if error %}<p class="danger-text" role="alert">{{ error }}</p>{% endif %}<label>Super Admin Access Code<input type="password" name="access_code" required autocomplete="off"></label><button type="submit">Continue</button></form></div>
+{% endblock %}

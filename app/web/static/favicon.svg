@@ -1,0 +1,45 @@
+<svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+<title id="title">SANOVA favicon</title>
+<desc id="desc">Compact geometric SANOVA S mark with cyan, blue and violet facets.</desc>
+<defs>
+  <style>
+    .favicon-bg { fill: #f4f7ff; }
+    @media (prefers-color-scheme: dark) {
+      .favicon-bg { fill: #090b0f; }
+    }
+  </style>
+  <clipPath id="rounded"><rect x="4" y="4" width="112" height="112" rx="24"/></clipPath>
+</defs>
+<rect class="favicon-bg" x="4" y="4" width="112" height="112" rx="24"/>
+<defs>
+  <linearGradient id="main" x1="22" y1="18" x2="98" y2="102" gradientUnits="userSpaceOnUse">
+    <stop stop-color="#35E8FF"/>
+    <stop offset=".42" stop-color="#1486FF"/>
+    <stop offset=".73" stop-color="#514BFF"/>
+    <stop offset="1" stop-color="#C94CFF"/>
+  </linearGradient>
+  <linearGradient id="top" x1="24" y1="22" x2="84" y2="45" gradientUnits="userSpaceOnUse">
+    <stop stop-color="#55F0FF"/>
+    <stop offset="1" stop-color="#1378FF"/>
+  </linearGradient>
+  <linearGradient id="bottom" x1="25" y1="72" x2="82" y2="98" gradientUnits="userSpaceOnUse">
+    <stop stop-color="#167DFF"/>
+    <stop offset="1" stop-color="#C64BFF"/>
+  </linearGradient>
+</defs>
+<g clip-path="url(#rounded)">
+
+<!-- Solid, compact geometric S silhouette -->
+<path d="M82 19H43L22 39L34 51H64L76 62L64 73H35L22 85L34 97H76L98 76L86 64H56L44 53L56 42H85L98 30L82 19Z" fill="url(#main)"/>
+
+<!-- Faceted top and lower planes -->
+<path d="M43 19H82L98 30L85 42H56L44 53L34 51L22 39L43 19Z" fill="url(#top)"/>
+<path d="M35 73H64L76 62L86 64L98 76L76 97H34L22 85L35 73Z" fill="url(#bottom)"/>
+
+<!-- Small structural facets; no outer glow/ring -->
+<path d="M56 42H85L98 30L85 42L64 53L44 53L56 42Z" fill="#2C63FF" fill-opacity=".55"/>
+<path d="M35 73H64L76 62L64 73L44 85L22 85L35 73Z" fill="#1E7BFF" fill-opacity=".48"/>
+<path d="M43 19L56 19L43 31L34 39L22 39L43 19Z" fill="#7BF7FF" fill-opacity=".35"/>
+<path d="M34 97L22 85L44 85L56 97H34Z" fill="#A94CFF" fill-opacity=".38"/>
+</g>
+</svg>

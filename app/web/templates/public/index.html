@@ -1,0 +1,238 @@
+{% extends 'base.html' %}
+{% block title %}Sanova — {{ t('public.hero.title_line_two') }}{% endblock %}
+{% block content %}
+<section class="public-hero ecosystem-hero" aria-labelledby="hero-title">
+  <div class="hero-copy">
+    <h1 id="hero-title"><span>{{ t('public.hero.title_line_two') }}</span></h1>
+    <p>{{ t('public.hero.body') }}</p>
+    <div class="actions">
+      <a class="button primary" href="/signup">{{ t('public.cta.start') }}</a>
+      <a class="button" href="/login">{{ t('public.cta.login') }}</a>
+    </div>
+    <div class="trust-row">
+      <span><span class="check">✓</span>{{ t('public.trust.private') }}</span>
+      <span><span class="check">✓</span>{{ t('public.trust.control') }}</span>
+      <span><span class="check">✓</span>{{ t('public.trust.workflow') }}</span>
+    </div>
+  </div>
+
+  <div class="hero-visual ecosystem-orbit" aria-label="{{ t('public.orbit.label') }}">
+    <div class="orbit orbit-one" aria-hidden="true"></div>
+    <div class="orbit orbit-two" aria-hidden="true"></div>
+    <div class="orbit orbit-three" aria-hidden="true"></div>
+    <div class="orbit-core">
+      <img src="{{ url_for('static', path='sanova-ui-mark.svg') }}" alt="Sanova" width="76" height="76">
+      <span>Sanova</span>
+    </div>
+    <span class="ecosystem-node node-one" aria-hidden="true">AI</span>
+    <span class="ecosystem-node node-two" aria-hidden="true">AI</span>
+    <span class="ecosystem-node node-three" aria-hidden="true">AI</span>
+    <span class="ecosystem-node node-four" aria-hidden="true">AI</span>
+  </div>
+</section>
+
+<section class="showcase section" aria-labelledby="showcase-title">
+  <div class="showcase-head">
+    <span class="eyebrow">{{ t('public.showcase.eyebrow') }}</span>
+    <h2 id="showcase-title">{{ t('public.showcase.title') }}</h2>
+    <p>{{ t('public.showcase.body') }}</p>
+  </div>
+
+  <div class="sc-stage">
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+      <symbol id="sc-i-home" viewBox="0 0 24 24"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></symbol>
+      <symbol id="sc-i-flow" viewBox="0 0 24 24"><circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="M8.5 6H14a3 3 0 013 3v6.5"/></symbol>
+      <symbol id="sc-i-plug" viewBox="0 0 24 24"><path d="M9 2v6M15 2v6M6 8h12v4a6 6 0 01-12 0V8zM12 18v4"/></symbol>
+      <symbol id="sc-i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+      <symbol id="sc-i-file" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></symbol>
+    </svg>
+
+    <div class="sc-win" data-showcase role="group" aria-label="{{ t('public.showcase.aria') }}">
+      <!-- sidebar -->
+      <nav class="sc-side" role="tablist" aria-label="{{ t('public.showcase.aria_nav') }}">
+        <div class="sc-brand"><img src="{{ url_for('static', path='sanova-ui-mark.svg') }}" alt="" width="18" height="18"><span>Sanova</span></div>
+        <button class="sc-nav is-active" role="tab" aria-selected="true" data-sc-nav type="button"><svg><use href="#sc-i-home"/></svg><span>{{ t('public.showcase.nav_overview') }}</span></button>
+        <button class="sc-nav" role="tab" aria-selected="false" data-sc-nav type="button"><svg><use href="#sc-i-flow"/></svg><span>{{ t('public.showcase.nav_workflows') }}</span></button>
+        <button class="sc-nav" role="tab" aria-selected="false" data-sc-nav type="button"><svg><use href="#sc-i-plug"/></svg><span>{{ t('public.showcase.nav_providers') }}</span></button>
+        <button class="sc-nav" role="tab" aria-selected="false" data-sc-nav type="button"><svg><use href="#sc-i-clock"/></svg><span>{{ t('public.showcase.nav_runs') }}</span></button>
+        <button class="sc-nav" role="tab" aria-selected="false" data-sc-nav type="button"><svg><use href="#sc-i-file"/></svg><span>{{ t('public.showcase.nav_logs') }}</span></button>
+        <div class="sc-label">{{ t('public.showcase.pinned') }}</div>
+        <div class="sc-fav"><i class="sc-dot g"></i><span>{{ t('public.showcase.wf_digest') }}</span></div>
+        <div class="sc-fav"><i class="sc-dot b"></i><span>{{ t('public.showcase.wf_triage') }}</span></div>
+        <div class="sc-fav"><i class="sc-dot a"></i><span>{{ t('public.showcase.wf_translation') }}</span></div>
+      </nav>
+
+      <!-- main -->
+      <div class="sc-main">
+        <div class="sc-top"><b data-sc-title>{{ t('public.showcase.nav_overview') }}</b><span class="sc-sp"></span><span class="sc-pill">{{ t('public.showcase.pill_providers') }}</span><span class="sc-pill">{{ t('public.showcase.live') }}</span></div>
+        <div class="sc-body">
+
+          <!-- 1 · overview -->
+          <div class="sc-panel is-active" data-sc-panel role="tabpanel">
+            <div class="sc-split">
+              <div>
+                <div class="sc-h" data-rise style="--i:0">{{ t('public.showcase.ov_title') }}</div>
+                <div class="sc-p" data-rise style="--i:1">{{ t('public.showcase.ov_desc') }}</div>
+                <div class="sc-props" data-rise style="--i:2">
+                  <span class="sc-tag"><i class="sc-dot g"></i>{{ t('public.showcase.active') }}</span>
+                  <span class="sc-tag">{{ t('public.showcase.schedule') }}</span>
+                  <span class="sc-tag">{{ t('public.showcase.pill_providers') }}</span>
+                </div>
+                <div class="sc-sub" data-rise style="--i:3">{{ t('public.showcase.activity') }}</div>
+                <div class="sc-feed">
+                  <div class="sc-feed-row" data-rise style="--i:4"><span class="sc-av">S</span><div>{{ t('public.showcase.feed1') }}<small>{{ t('public.showcase.ago1') }}</small></div></div>
+                  <div class="sc-feed-row" data-rise style="--i:5"><span class="sc-av g">A</span><div>{{ t('public.showcase.feed2') }}<small>{{ t('public.showcase.ago2') }}</small></div></div>
+                  <div class="sc-feed-row" data-rise style="--i:6"><span class="sc-av a">R</span><div>{{ t('public.showcase.feed3') }}<small>{{ t('public.showcase.ago3') }}</small></div></div>
+                </div>
+              </div>
+              <aside class="sc-chat" data-rise style="--i:3">
+                <div class="sc-chat-h"><img src="{{ url_for('static', path='sanova-ui-mark.svg') }}" alt="" width="16" height="16">{{ t('public.showcase.chat_title') }}<span class="sc-live">{{ t('public.showcase.live') }}</span></div>
+                <div class="sc-chat-b">
+                  <div class="sc-msg me">{{ t('public.showcase.chat_user') }}</div>
+                  <div class="sc-msg">{{ t('public.showcase.chat_drafting') }} <b data-sc-reply>OpenAI</b> · {{ t('public.showcase.chat_eta') }}<div class="sc-bar"><i></i></div></div>
+                  <div class="sc-chips">
+                    <button type="button" class="sc-chip is-on" data-hit="route" data-reply="OpenAI">OpenAI</button>
+                    <button type="button" class="sc-chip" data-hit="route" data-reply="Anthropic" data-demo>Anthropic</button>
+                    <button type="button" class="sc-chip" data-hit="route" data-reply="Google Gemini">Gemini</button>
+                  </div>
+                </div>
+                <div class="sc-input"><span class="sc-type">{{ t('public.showcase.chat_placeholder') }}</span><i class="sc-caret"></i></div>
+              </aside>
+            </div>
+          </div>
+
+          <!-- 2 · workflows board -->
+          <div class="sc-panel" data-sc-panel role="tabpanel">
+            <div class="sc-board">
+              <div>
+                <div class="sc-col-h" data-rise style="--i:0"><i class="sc-dot"></i>{{ t('public.showcase.col_draft') }} <span>2</span></div>
+                <button type="button" class="sc-card" data-hit="card" data-rise style="--i:1"><strong>{{ t('public.showcase.wf_lead') }}</strong><div class="sc-meta"><img class="sc-logo" src="{{ url_for('static', path='provider-openai.svg') }}" alt="" width="18" height="18">OpenAI · {{ t('public.showcase.m_manual') }}</div></button>
+                <button type="button" class="sc-card" data-hit="card" data-rise style="--i:2"><strong>{{ t('public.showcase.wf_cleanup') }}</strong><div class="sc-meta"><img class="sc-logo" src="{{ url_for('static', path='provider-gemini.svg') }}" alt="" width="18" height="18">Gemini · {{ t('public.showcase.m_weekly') }}</div></button>
+              </div>
+              <div>
+                <div class="sc-col-h" data-rise style="--i:1"><i class="sc-dot b"></i>{{ t('public.showcase.col_running') }} <span>3</span></div>
+                <button type="button" class="sc-card" data-hit="card" data-rise style="--i:2"><strong>{{ t('public.showcase.wf_digest') }}</strong><div class="sc-meta"><img class="sc-logo" src="{{ url_for('static', path='provider-openai.svg') }}" alt="" width="18" height="18">OpenAI · {{ t('public.showcase.m_mon') }}</div></button>
+                <button type="button" class="sc-card" data-hit="card" data-demo data-rise style="--i:3"><strong>{{ t('public.showcase.wf_triage') }}</strong><div class="sc-meta"><img class="sc-logo" src="{{ url_for('static', path='provider-anthropic.svg') }}" alt="" width="18" height="18">Anthropic · {{ t('public.showcase.m_hourly') }}</div></button>
+                <button type="button" class="sc-card" data-hit="card" data-rise style="--i:4"><strong>{{ t('public.showcase.wf_translation') }}</strong><div class="sc-meta"><img class="sc-logo" src="{{ url_for('static', path='provider-gemini.svg') }}" alt="" width="18" height="18">Gemini · {{ t('public.showcase.m_upload') }}</div></button>
+              </div>
+              <div>
+                <div class="sc-col-h" data-rise style="--i:2"><i class="sc-dot g"></i>{{ t('public.showcase.col_done') }} <span>2</span></div>
+                <button type="button" class="sc-card" data-hit="card" data-rise style="--i:3"><strong>{{ t('public.showcase.wf_notes') }}</strong><div class="sc-meta"><img class="sc-logo" src="{{ url_for('static', path='provider-anthropic.svg') }}" alt="" width="18" height="18">Anthropic · {{ t('public.showcase.col_done') }}</div></button>
+                <button type="button" class="sc-card" data-hit="card" data-rise style="--i:4"><strong>{{ t('public.showcase.wf_invoice') }}</strong><div class="sc-meta"><img class="sc-logo" src="{{ url_for('static', path='provider-openai.svg') }}" alt="" width="18" height="18">OpenAI · {{ t('public.showcase.col_done') }}</div></button>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3 · providers -->
+          <div class="sc-panel" data-sc-panel role="tabpanel">
+            <div class="sc-table" data-rise style="--i:0">
+              <div class="sc-tr"><span>{{ t('public.showcase.th_provider') }}</span><span>{{ t('public.showcase.th_status') }}</span><span>{{ t('public.showcase.th_latency') }}</span><span>{{ t('public.showcase.th_usage') }}</span></div>
+              <button type="button" class="sc-tr is-on" data-hit="prov"><span class="sc-who"><img class="sc-logo" src="{{ url_for('static', path='provider-openai.svg') }}" alt="" width="18" height="18">OpenAI</span><span class="sc-status"><i class="sc-dot g"></i>{{ t('public.showcase.connected') }}</span><span>420 ms</span><span class="sc-meter"><i style="width:72%"></i></span></button>
+              <button type="button" class="sc-tr" data-hit="prov" data-demo><span class="sc-who"><img class="sc-logo" src="{{ url_for('static', path='provider-anthropic.svg') }}" alt="" width="18" height="18">Anthropic</span><span class="sc-status"><i class="sc-dot g"></i>{{ t('public.showcase.connected') }}</span><span>510 ms</span><span class="sc-meter"><i style="width:48%"></i></span></button>
+              <button type="button" class="sc-tr" data-hit="prov"><span class="sc-who"><img class="sc-logo" src="{{ url_for('static', path='provider-gemini.svg') }}" alt="" width="18" height="18">Google Gemini</span><span class="sc-status"><i class="sc-dot a"></i>{{ t('public.showcase.limited') }}</span><span>380 ms</span><span class="sc-meter"><i style="width:31%"></i></span></button>
+            </div>
+            <div class="sc-note" data-rise style="--i:2">
+              <div class="sc-stat"><b>1,284</b><span>{{ t('public.showcase.stat_runs') }}</span></div>
+              <div class="sc-stat"><b>99.2%</b><span>{{ t('public.showcase.stat_success') }}</span></div>
+              <div class="sc-stat"><b>3</b><span>{{ t('public.showcase.stat_fallback') }}</span></div>
+            </div>
+          </div>
+
+          <!-- 4 · runs timeline -->
+          <div class="sc-panel" data-sc-panel role="tabpanel">
+            <div class="sc-tl" data-rise style="--i:0">
+              <div class="sc-today" aria-hidden="true"></div>
+              <div class="sc-tl-head"><div></div><div class="sc-weeks"><span>W1</span><span>W2</span><span>W3</span><span>W4</span><span>W5</span><span>W6</span><span>W7</span><span>W8</span></div></div>
+              <button type="button" class="sc-tl-row" data-hit="tl"><div class="sc-tl-name"><i class="sc-dot g"></i>{{ t('public.showcase.wf_digest') }}</div><div class="sc-lane"><i style="--c:#4cc38a;--i:0;left:3%;width:52%"></i></div></button>
+              <button type="button" class="sc-tl-row" data-hit="tl"><div class="sc-tl-name"><i class="sc-dot b"></i>{{ t('public.showcase.wf_triage') }}</div><div class="sc-lane"><i style="--c:#8ea5ff;--i:1;left:14%;width:60%"></i></div></button>
+              <button type="button" class="sc-tl-row" data-hit="tl" data-demo><div class="sc-tl-name"><i class="sc-dot a"></i>{{ t('public.showcase.wf_translation') }}</div><div class="sc-lane"><i style="--c:#e5a93d;--i:2;left:30%;width:44%"></i></div></button>
+              <button type="button" class="sc-tl-row" data-hit="tl"><div class="sc-tl-name"><i class="sc-dot r"></i>{{ t('public.showcase.wf_lead') }}</div><div class="sc-lane"><i style="--c:#ef6b63;--i:3;left:52%;width:40%"></i></div></button>
+              <button type="button" class="sc-tl-row" data-hit="tl"><div class="sc-tl-name"><i class="sc-dot"></i>{{ t('public.showcase.wf_cleanup') }}</div><div class="sc-lane"><i style="--c:#6f7d93;--i:4;left:66%;width:30%"></i></div></button>
+            </div>
+          </div>
+
+          <!-- 5 · logs -->
+          <div class="sc-panel" data-sc-panel role="tabpanel">
+            <div class="sc-code" data-rise style="--i:0">
+              <div class="sc-code-h"><span class="sc-dot g"></span>routing.yaml<span style="margin-left:auto;color:var(--w-dim)">+4 −2</span></div>
+              <button type="button" class="sc-ln" data-hit="ln"><span>1</span><span></span><span>workflow: weekly-digest</span></button>
+              <button type="button" class="sc-ln" data-hit="ln"><span>2</span><span></span><span>schedule: "0 8 * * 1"</span></button>
+              <button type="button" class="sc-ln del" data-hit="ln"><span>3</span><span>−</span><span>provider: openai</span></button>
+              <button type="button" class="sc-ln del" data-hit="ln"><span>4</span><span>−</span><span>on_error: stop</span></button>
+              <button type="button" class="sc-ln add" data-hit="ln" data-demo><span>3</span><span>+</span><span>route:</span></button>
+              <button type="button" class="sc-ln add" data-hit="ln"><span>4</span><span>+</span><span>  primary: openai</span></button>
+              <button type="button" class="sc-ln add" data-hit="ln"><span>5</span><span>+</span><span>  fallback: [anthropic, gemini]</span></button>
+              <button type="button" class="sc-ln add" data-hit="ln"><span>6</span><span>+</span><span>on_error: retry_with_fallback</span></button>
+              <button type="button" class="sc-ln" data-hit="ln"><span>7</span><span></span><span>notify: team@workspace</span></button>
+              <button type="button" class="sc-ln" data-hit="ln"><span>8</span><span></span><span>privacy: keys_stay_private</span></button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- animated cursor -->
+      <div class="sc-cursor" data-sc-cursor aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M4 2.5l15 8.2-6.4 1.9 3.6 6.6-2.7 1.5-3.6-6.6L5.4 18.2z" fill="#fff" stroke="#111" stroke-width="1.4" stroke-linejoin="round"/></svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="provider-section section" aria-labelledby="providers-title">
+  <div class="provider-heading">
+    <span class="eyebrow">{{ t('public.providers.eyebrow') }}</span>
+    <h2 id="providers-title">{{ t('public.providers.title') }}</h2>
+    <p>{{ t('public.providers.body') }}</p>
+  </div>
+
+  <div class="provider-grid">
+    <article class="provider-card">
+      <div class="provider-top">
+        <div class="provider-mark"><img src="{{ url_for('static', path='provider-openai.svg') }}" alt="OpenAI logo" width="30" height="30"></div>
+        <div class="provider-copy">
+          <h3>OpenAI</h3>
+          <p>{{ t('public.providers.openai') }}</p>
+        </div>
+      </div>
+      <div class="provider-links" aria-label="OpenAI official links">
+        <a href="https://openai.com/" target="_blank" rel="noopener noreferrer">{{ t('public.providers.official') }} ↗</a>
+        <a href="https://openai.com/policies/terms-of-use/" target="_blank" rel="noopener noreferrer">{{ t('public.providers.terms') }} ↗</a>
+        <a href="https://openai.com/policies/row-privacy-policy/" target="_blank" rel="noopener noreferrer">{{ t('public.providers.privacy') }} ↗</a>
+      </div>
+    </article>
+
+    <article class="provider-card">
+      <div class="provider-top">
+        <div class="provider-mark"><img src="{{ url_for('static', path='provider-anthropic.svg') }}" alt="Anthropic logo" width="30" height="30"></div>
+        <div class="provider-copy">
+          <h3>Anthropic</h3>
+          <p>{{ t('public.providers.anthropic') }}</p>
+        </div>
+      </div>
+      <div class="provider-links" aria-label="Anthropic official links">
+        <a href="https://www.anthropic.com/" target="_blank" rel="noopener noreferrer">{{ t('public.providers.official') }} ↗</a>
+        <a href="https://privacy.anthropic.com/en/collections/10672414-policies-terms-of-service" target="_blank" rel="noopener noreferrer">{{ t('public.providers.terms') }} ↗</a>
+        <a href="https://privacy.anthropic.com/en/" target="_blank" rel="noopener noreferrer">{{ t('public.providers.privacy') }} ↗</a>
+      </div>
+    </article>
+
+    <article class="provider-card">
+      <div class="provider-top">
+        <div class="provider-mark"><img src="{{ url_for('static', path='provider-gemini.svg') }}" alt="Google Gemini logo" width="30" height="30"></div>
+        <div class="provider-copy">
+          <h3>Google Gemini</h3>
+          <p>{{ t('public.providers.gemini') }}</p>
+        </div>
+      </div>
+      <div class="provider-links" aria-label="Google Gemini official links">
+        <a href="https://gemini.google.com/" target="_blank" rel="noopener noreferrer">{{ t('public.providers.official') }} ↗</a>
+        <a href="https://policies.google.com/terms" target="_blank" rel="noopener noreferrer">{{ t('public.providers.terms') }} ↗</a>
+        <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">{{ t('public.providers.privacy') }} ↗</a>
+      </div>
+    </article>
+  </div>
+
+  <p class="provider-note">{{ t('public.providers.note') }}</p>
+</section>
+{% endblock %}

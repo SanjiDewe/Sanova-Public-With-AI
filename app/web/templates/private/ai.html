@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %}Sanova AI · Sanova{% endblock %}
+{% block content %}
+<section class="app-pagebar">
+  <div class="app-pagebar-title"><p class="eyebrow">{{ t('nav.ai') }}</p><h1>{{ t('app.ai.title') }}</h1><p>{{ t('app.ai.body') }}</p></div>
+  <div class="page-actions"><a class="button" href="/app/tasks"><svg><use href="#i-check"></use></svg>{{ t('nav.tasks') }}</a></div>
+</section>
+
+<section class="ai-workspace">
+  <div class="ai-main-panel">
+    <header class="ai-toolbar"><div class="ai-toolbar-left"><span class="ai-status-dot"></span><div class="ai-thread-title"><strong>Sanova AI</strong><span>{% if record %}Conversation {{ conversation_id }}{% else %}New conversation{% endif %}</span></div></div><div class="ai-thread-actions"><a class="icon-button" href="/app/ai" title="New conversation" aria-label="New conversation"><svg><use href="#i-plus"></use></svg></a></div></header>
+    <div class="ai-thread">
+      {% if error %}<div class="alert">{{ error }}</div>{% endif %}
+      {% if request.query_params.get('executed') %}<div class="alert success-alert">{{ t('app.ai.executed') }} <strong>{{ request.query_params.get('task') }}</strong></div>{% endif %}
+      {% if request.query_params.get('error') %}<div class="alert">{{ request.query_params.get('error') }}</div>{% endif %}
+      {% if record and record.messages %}
+        {% for item in record.messages %}
+        <div class="ai-message-row {{ item.role }}"><span class="ai-role">{% if item.role == 'user' %}You{% else %}S{% endif %}</span><div class="ai-message-bubble">{{ item.content }}</div></div>
+        {% endfor %}
+        {% if record.pending %}<div class="approval-box"><h3>{{ t('app.ai.review_title') }}</h3><p>{{ t('app.ai.review_body') }}</p><pre style="overflow:auto;font-size:.62rem;margin:8px 0 0">{{ record.pending.data | tojson(indent=2) }}</pre><div class="actions"><form method="post" action="/app/ai/approve"><input type="hidden" name="conversation_id" value="{{ record.id }}"><button class="primary" type="submit">{{ t('app.ai.approve') }}</button></form><form method="post" action="/app/ai/reject"><input type="hidden" name="conversation_id" value="{{ record.id }}"><button type="submit">{{ t('app.ai.reject') }}</button></form></div></div>{% endif %}
+      {% else %}
+        <div class="ai-message-row"><span class="ai-role">S</span><div class="ai-message-bubble">Tell me the outcome you want. I can help structure it into a controlled Sanova action and show you the proposal before anything is executed.</div></div>
+      {% endif %}
+    </div>
+    <div class="ai-composer-bar">
+      <form method="post" action="/app/ai/chat">
+        <input type="hidden" name="conversation_id" value="{{ conversation_id or '' }}">
+        <div class="ai-composer-shell"><textarea id="message" name="message" data-autogrow data-submit-shortcut required placeholder="{{ t('app.ai.placeholder') }}"></textarea><div class="ai-composer-foot"><div class="ai-controls"><select class="ai-select" name="provider" id="ai-provider" aria-label="{{ t('app.ai.provider') }}">{% for name, models in providers.items() %}<option value="{{ name }}"{% if name == provider %} selected{% endif %}>{{ name }}</option>{% endfor %}</select><select class="ai-select" name="model" id="ai-model" aria-label="{{ t('app.ai.model') }}">{% for item in providers.get(provider, []) %}<option value="{{ item.model }}"{% if item.model == model %} selected{% endif %}>{{ item.label }}</option>{% endfor %}</select></div><button class="ai-send" type="submit">{{ t('app.ai.send') }} <span aria-hidden="true">↵</span></button></div></div>
+        <div class="intent-hints" style="margin-top:7px"><button class="hint-chip" type="button" data-hint="Create a sandbox task to make 1 mug and ship it to TEST-DESTINATION" data-hint-target="message">Example task</button><span class="muted small" style="align-self:center">Ctrl/⌘ + Enter to send</span></div>
+      </form>
+    </div>
+  </div>
+
+  <aside class="ai-side-panel">
+    <div class="panel-head"><div><h2>Context</h2><p>Current execution boundary</p></div></div>
+    <div class="ai-side-section"><div class="side-row"><span>Mode</span><strong>Sandbox</strong></div><div class="side-row"><span>Approval</span><strong>Required</strong></div><div class="side-row"><span>Provider</span><strong>{{ provider }}</strong></div><div class="side-row"><span>Model</span><strong>{{ model }}</strong></div></div>
+    <div class="ai-side-section"><p class="eyebrow">{{ t('app.ai.how_title') }}</p><div class="flow-list"><div class="flow-item"><span class="flow-num">01</span><span><strong>{{ t('app.ai.step_one') }}</strong><span>Start with the result.</span></span></div><div class="flow-item"><span class="flow-num">02</span><span><strong>{{ t('app.ai.step_two') }}</strong><span>Sanova proposes the action.</span></span></div><div class="flow-item"><span class="flow-num">03</span><span><strong>{{ t('app.ai.step_three') }}</strong><span>You stay in control.</span></span></div></div></div>
+  </aside>
+</section>
+<script>window.sanovaAIProviders = {{ providers | tojson }};</script>
+{% endblock %}

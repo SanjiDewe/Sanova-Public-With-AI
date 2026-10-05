@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block title %}{{ t('app.tasks.title') }} · Sanova{% endblock %}
+{% block content %}
+<section class="app-pagebar">
+  <div class="app-pagebar-title"><p class="eyebrow">{{ t('nav.tasks') }}</p><h1>{{ t('app.tasks.title') }}</h1><p>{{ t('app.tasks.body') }}</p></div>
+  <div class="page-actions"><a class="button" href="/app/simulate"><svg><use href="#i-play"></use></svg>{{ t('app.simulate.title') }}</a><a class="button primary" href="/app/execute"><svg><use href="#i-plus"></use></svg>{{ t('nav.execute') }}</a></div>
+</section>
+{% if request.query_params.get('webhook_status') %}<div class="alert success-alert">{{ t('app.tasks.webhook_updated') }}: {{ request.query_params.get('webhook_status') }}</div>{% endif %}
+{% if request.query_params.get('webhook_error') %}<div class="alert">{{ request.query_params.get('webhook_error') }}</div>{% endif %}
+
+<div class="task-toolbar">
+  <div class="task-toolbar-left">
+    <button class="filter-chip active" type="button" data-task-filter="all">All</button>
+    <button class="filter-chip" type="button" data-task-filter="processing">Processing</button>
+    <button class="filter-chip" type="button" data-task-filter="fulfillment">Fulfillment</button>
+    <button class="filter-chip" type="button" data-task-filter="shipped">Shipped</button>
+    <button class="filter-chip" type="button" data-task-filter="completed">Completed</button><button class="filter-chip" type="button" data-task-filter="failed">Failed</button>
+  </div>
+  <div class="task-toolbar-right"><input class="task-search" type="search" data-task-search placeholder="Search tasks" aria-label="Search tasks"></div>
+</div>
+
+<div class="board" aria-label="Task board">
+  {% for column in [('processing','Processing'),('fulfillment','Fulfillment'),('shipped','Shipped'),('completed','Completed'),('failed','Failed')] %}
+  <section class="board-column" data-board-column="{{ column[0] }}">
+    <div class="board-column-head"><span class="board-column-title"><span class="status-dot"></span>{{ column[1] }}</span><span class="board-count" data-board-count>0</span></div>
+    <div class="task-stack">
+      {% for record in records if record.task.state == column[0] %}
+      <article class="task-card" data-task-card data-task-state="{{ record.task.state }}" data-task-id="{{ record.task.id }}" data-task-title="{{ record.task.intent }}" data-task-provider="{{ record.task.provider or 'mock' }}" data-task-message="{{ (record.result or {}).get('message','') }}" tabindex="0" role="button" aria-label="Open task {{ record.task.id }}">
+        <div class="task-card-top"><span class="task-id">{{ record.task.id }}</span><span class="task-state">{{ record.task.state }}</span></div>
+        <h3>{{ record.task.intent }}</h3><p>{{ (record.result or {}).get('message','') or 'No result message recorded.' }}</p>
+        <div class="task-card-foot"><span class="task-provider">{{ record.task.provider or 'mock' }}</span><span class="task-open"><svg><use href="#i-chevron"></use></svg></span></div>
+      </article>
+      {% endfor %}
+      <div class="empty-column" data-board-empty hidden>No tasks here.</div>
+    </div>
+  </section>
+  {% endfor %}
+</div>
+
+<div class="drawer" data-task-drawer hidden>
+  <div class="drawer-backdrop" data-drawer-close></div>
+  <aside class="drawer-panel" role="dialog" aria-modal="true" aria-label="Task details">
+    <div class="drawer-head"><div><span class="eyebrow">Task</span><h2 data-drawer-task-title>Task</h2></div><button class="icon-button" type="button" data-drawer-close aria-label="Close"><svg><use href="#i-x"></use></svg></button></div>
+    <div class="drawer-body">
+      <div class="drawer-meta"><div class="meta-box"><span>ID</span><strong data-drawer-task-id>—</strong></div><div class="meta-box"><span>State</span><strong data-drawer-task-state>—</strong></div><div class="meta-box"><span>Provider</span><strong data-drawer-task-provider>—</strong></div><div class="meta-box"><span>Boundary</span><strong>Sandbox</strong></div></div>
+      <div class="eyebrow" style="margin-bottom:7px">Result</div><div class="drawer-message" data-drawer-task-message>No message recorded.</div>
+      <div class="section" style="margin-top:20px"><p class="eyebrow">Webhook transition</p><h3>Advance lifecycle</h3><p class="muted small">Use the existing webhook boundary to move the task through its sandbox lifecycle.</p><form method="post" data-task-webhook-form><div class="field"><label for="drawer-status">Status</label><select id="drawer-status" name="status"><option value="processing">processing</option><option value="fulfillment">fulfillment</option><option value="shipped">shipped</option><option value="completed">completed</option><option value="failed">failed</option></select></div><button class="primary full-width" type="submit">Process status</button></form></div>
+    </div>
+  </aside>
+</div>
+{% endblock %}
